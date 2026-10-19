@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+postgres-data/
+.git/
+.gitignore
+.dockerignore
+docker-compose*.yml
+Dockerfile
+*.md
+*.log
+*.test
+*.out
+tmp/

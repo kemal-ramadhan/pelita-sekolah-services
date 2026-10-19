@@ -1,0 +1,21 @@
+services:
+  edupilot-gateway:
+    ports: !override
+      - "127.0.0.1:18888:80"
+  db_auth:
+    volumes: !override
+      - e2e_pg:/var/lib/postgresql/data
+      - ../../postgres-init:/docker-entrypoint-initdb.d:ro
+  rabbitmq:
+    ports: !override []
+  # The assessment .env must share JWT_SECRET / GATEWAY_SECRET with the other services;
+  # for the isolated stack take them from instantion's .env (loaded last, wins).
+  edupilot-assesment:
+    env_file: !override
+      - ./edupilot-assesment/.env
+      - ./edupilot-instantion-service/.env
+    environment:
+      DB_NAME: edupilot_assesment_db
+      PORT: "8080"
+volumes:
+  e2e_pg: {}

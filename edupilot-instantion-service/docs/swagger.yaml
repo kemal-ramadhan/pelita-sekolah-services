@@ -1,0 +1,745 @@
+basePath: /
+definitions:
+  controller.HealthResponse:
+    properties:
+      database:
+        type: string
+      redis:
+        type: string
+      service:
+        type: string
+      status:
+        type: string
+      timestamp:
+        type: string
+    type: object
+  dto.AccountRequest:
+    properties:
+      email:
+        maxLength: 255
+        type: string
+      full_name:
+        maxLength: 255
+        type: string
+      password:
+        maxLength: 72
+        minLength: 8
+        type: string
+      phone:
+        maxLength: 50
+        type: string
+    required:
+    - email
+    - full_name
+    - password
+    type: object
+  dto.AdminCreateSchoolRequest:
+    properties:
+      account:
+        $ref: '#/definitions/dto.AccountRequest'
+      address:
+        maxLength: 2000
+        type: string
+      city_id:
+        $ref: '#/definitions/dto.OptionalUUID'
+      code:
+        maxLength: 255
+        type: string
+      district_id:
+        $ref: '#/definitions/dto.OptionalUUID'
+      email:
+        maxLength: 255
+        type: string
+      name:
+        maxLength: 255
+        type: string
+      npsn:
+        maxLength: 255
+        type: string
+      nss:
+        maxLength: 255
+        type: string
+      phone:
+        maxLength: 255
+        type: string
+      postal_code:
+        maxLength: 50
+        type: string
+      province_id:
+        $ref: '#/definitions/dto.OptionalUUID'
+      school_level:
+        enum:
+        - TK
+        - SD
+        - SMP
+        - SMA
+        - SMK
+        - SLB
+        - Lainnya
+        type: string
+      school_status:
+        maxLength: 255
+        type: string
+      timezone:
+        maxLength: 64
+        type: string
+      website:
+        maxLength: 255
+        type: string
+    required:
+    - code
+    - name
+    - school_level
+    type: object
+  dto.LinkAccountRequest:
+    properties:
+      user_id:
+        type: integer
+    type: object
+  dto.OptionalUUID:
+    properties:
+      uuid:
+        type: string
+      valid:
+        type: boolean
+    type: object
+  dto.SchoolRequest:
+    properties:
+      address:
+        maxLength: 2000
+        type: string
+      city_id:
+        $ref: '#/definitions/dto.OptionalUUID'
+      code:
+        maxLength: 255
+        type: string
+      district_id:
+        $ref: '#/definitions/dto.OptionalUUID'
+      email:
+        maxLength: 255
+        type: string
+      name:
+        maxLength: 255
+        type: string
+      npsn:
+        maxLength: 255
+        type: string
+      nss:
+        maxLength: 255
+        type: string
+      phone:
+        maxLength: 255
+        type: string
+      postal_code:
+        maxLength: 50
+        type: string
+      province_id:
+        $ref: '#/definitions/dto.OptionalUUID'
+      school_level:
+        enum:
+        - TK
+        - SD
+        - SMP
+        - SMA
+        - SMK
+        - SLB
+        - Lainnya
+        type: string
+      school_status:
+        maxLength: 255
+        type: string
+      timezone:
+        maxLength: 64
+        type: string
+      website:
+        maxLength: 255
+        type: string
+    required:
+    - code
+    - name
+    - school_level
+    type: object
+  dto.SchoolStatusRequest:
+    properties:
+      is_active:
+        type: boolean
+    required:
+    - is_active
+    type: object
+  dto.TeacherAssignmentReq:
+    properties:
+      employee_position_id:
+        $ref: '#/definitions/dto.OptionalUUID'
+      end_date:
+        type: string
+      is_active:
+        type: boolean
+      start_date:
+        type: string
+    type: object
+  dto.TeacherRequest:
+    properties:
+      assignments:
+        items:
+          $ref: '#/definitions/dto.TeacherAssignmentReq'
+        type: array
+      email:
+        maxLength: 255
+        type: string
+      employee_code:
+        maxLength: 255
+        type: string
+      employee_status:
+        maxLength: 255
+        type: string
+      full_name:
+        maxLength: 255
+        type: string
+      join_date:
+        maxLength: 10
+        type: string
+      number:
+        maxLength: 255
+        type: string
+      number_type:
+        maxLength: 255
+        type: string
+      phone:
+        maxLength: 50
+        type: string
+      schedules:
+        items:
+          $ref: '#/definitions/dto.TeacherScheduleReq'
+        type: array
+      status:
+        maxLength: 255
+        type: string
+      subjects:
+        items:
+          $ref: '#/definitions/dto.TeacherSubjectReq'
+        type: array
+    required:
+    - employee_code
+    - full_name
+    type: object
+  dto.TeacherScheduleReq:
+    properties:
+      class_id:
+        $ref: '#/definitions/dto.OptionalUUID'
+      day_of_week:
+        type: integer
+      end_time:
+        type: string
+      start_time:
+        type: string
+      subject_id:
+        $ref: '#/definitions/dto.OptionalUUID'
+    type: object
+  dto.TeacherSubjectReq:
+    properties:
+      academic_id:
+        $ref: '#/definitions/dto.OptionalUUID'
+      is_primary:
+        type: boolean
+      subject_id:
+        $ref: '#/definitions/dto.OptionalUUID'
+    type: object
+host: localhost:8888
+info:
+  contact: {}
+  description: School (institution) and teacher management service for EduPilot.
+  title: EduPilot Instantion Service API
+  version: "1.0"
+paths:
+  /health:
+    get:
+      description: Check service, database, and Redis connectivity
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.HealthResponse'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/controller.HealthResponse'
+      summary: Health Check
+      tags:
+      - System
+  /instantion/admin/schools:
+    get:
+      parameters:
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Limit (max 100)
+        in: query
+        name: limit
+        type: integer
+      - description: Search name / code / npsn
+        in: query
+        name: search
+        type: string
+      - description: active | inactive
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: List schools (admin)
+      tags:
+      - Admin
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: School (+ optional account)
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AdminCreateSchoolRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Create a school, optionally with an institution account (admin)
+      tags:
+      - Admin
+  /instantion/admin/schools/{id}:
+    get:
+      parameters:
+      - description: School ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Get a school (admin)
+      tags:
+      - Admin
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: School ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: School
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SchoolRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Update a school (admin)
+      tags:
+      - Admin
+  /instantion/admin/schools/{id}/accounts:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: School ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: user_id
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LinkAccountRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Unlink an auth user from a school (admin)
+      tags:
+      - Admin
+    get:
+      parameters:
+      - description: School ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: List accounts linked to a school (admin)
+      tags:
+      - Admin
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: School ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: user_id
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LinkAccountRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "409":
+          description: Conflict
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Link an auth user to a school (admin)
+      tags:
+      - Admin
+  /instantion/admin/schools/{id}/status:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: School ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: is_active (required)
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SchoolStatusRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Activate / deactivate a school (admin)
+      tags:
+      - Admin
+  /instantion/admin/stats:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Platform statistics (admin)
+      tags:
+      - Admin
+  /instantion/school/profile:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: SCHOOL_NOT_SET_UP
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Get tenant school profile
+      tags:
+      - School
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: School
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SchoolRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "409":
+          description: Conflict
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Create tenant school profile (once)
+      tags:
+      - School
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: School
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SchoolRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Update tenant school profile
+      tags:
+      - School
+  /instantion/school/teachers:
+    get:
+      parameters:
+      - description: Page (default 1)
+        in: query
+        name: page
+        type: integer
+      - description: Limit (default 10, max 100)
+        in: query
+        name: limit
+        type: integer
+      - description: Search full_name / employee_code / email
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: List teachers of the tenant school
+      tags:
+      - Teachers
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Teacher
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.TeacherRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "409":
+          description: Conflict
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Create a teacher
+      tags:
+      - Teachers
+  /instantion/school/teachers/{id}:
+    delete:
+      parameters:
+      - description: Teacher ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Delete (soft) a teacher
+      tags:
+      - Teachers
+    get:
+      parameters:
+      - description: Teacher ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Get a teacher (with subjects, assignments, schedules)
+      tags:
+      - Teachers
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Teacher ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Teacher
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.TeacherRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Update a teacher
+      tags:
+      - Teachers
+  /instantion/school/teachers/import:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: .xlsx file, max 5 MB
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: Validate only
+        in: query
+        name: dry_run
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - Bearer: []
+      summary: Import teachers from .xlsx (first sheet, header row 1)
+      tags:
+      - Teachers
+  /instantion/school/teachers/import/template:
+    get:
+      produces:
+      - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: file
+      security:
+      - Bearer: []
+      summary: Download the teacher import .xlsx template
+      tags:
+      - Teachers
+schemes:
+- http
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

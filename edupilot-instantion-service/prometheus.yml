@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'edupilot-instantion-service'
+    static_configs:
+      # Service name in services/docker-compose.yml
+      - targets: ['instantion-service:8080']
+
+  - job_name: 'jaeger'
+    static_configs:
+      - targets: ['jaeger:14268']

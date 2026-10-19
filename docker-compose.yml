@@ -1,0 +1,123 @@
+networks:
+  edupilot_net:
+    driver: bridge
+
+services:
+  edupilot-gateway:
+    build: ./edupilot-gateway
+    ports:
+      - "8888:80"
+    env_file:
+      - ./edupilot-gateway/.env
+    depends_on:
+      db_auth:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      auth-service:
+        condition: service_started
+      instantion-service:
+        condition: service_started
+      edupilot-assesment:
+        condition: service_started
+    networks:
+      - edupilot_net
+    restart: on-failure
+
+  db_auth:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: edupilot_auth_db
+    volumes:
+      - ./postgres-data/auth:/var/lib/postgresql/data
+      # Only runs on first init of an empty data dir; creates instantion + gateway DBs.
+      - ./postgres-init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - edupilot_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    networks:
+      - edupilot_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "edupilot_rabbitmq_erlang_cookie"
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    # Not needed by browsers; bound to localhost only for local debugging.
+    ports:
+      - "127.0.0.1:5672:5672"
+      - "127.0.0.1:15672:15672"
+    networks:
+      - edupilot_net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 20s
+
+  auth-service:
+    build: ./edupilot-auth-service
+    env_file:
+      - ./edupilot-auth-service/.env
+    depends_on:
+      db_auth:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - edupilot_net
+    restart: on-failure
+
+  instantion-service:
+    build: ./edupilot-instantion-service
+    env_file:
+      - ./edupilot-instantion-service/.env
+    depends_on:
+      db_auth:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - edupilot_net
+    restart: on-failure
+
+  edupilot-assesment:
+    build: ./edupilot-assesment
+    env_file:
+      - ./edupilot-assesment/.env
+    # Docker-network addresses (override localhost values from a local-dev .env).
+    environment:
+      DB_HOST: db_auth
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
+      INSTANTION_INTERNAL_URL: http://instantion-service:8080
+    depends_on:
+      db_auth:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      instantion-service:
+        condition: service_started
+    networks:
+      - edupilot_net
+    restart: on-failure
+

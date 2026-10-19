@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0-provisional",
+  "note": "Bobot = hipotesis awal (PRD §6.5); wajib dikalibrasi dengan panel ahli/Guru BK dan data empiris. AR = subtes L (Penalaran Logis), SP = subtes S (Spasial).",
+  "order": ["IPA", "IPS", "Bahasa", "Vokasi", "Seni"],
+  "rumpun": {
+    "IPA": {
+      "name": "IPA (MIPA & Kesehatan)",
+      "weights": {"minat_M": 0.40, "minat_T": 0.20, "bakat_N": 0.20, "bakat_L": 0.20},
+      "flag_minat": ["M"],
+      "flag_bakat": ["N", "L"],
+      "description": "Kamu menunjukkan ketertarikan dan potensi pada bidang sains, matematika, dan penalaran kuantitatif. Rumpun IPA dapat menjadi pilihan yang menantang bagimu.",
+      "careers": ["Kedokteran", "Farmasi", "Teknik", "MIPA", "Pertanian", "Ilmu Data"]
+    },
+    "IPS": {
+      "name": "IPS (Sosial-Ekonomi-Hukum)",
+      "weights": {"minat_S": 0.30, "minat_E": 0.30, "bakat_V": 0.15, "bakat_L": 0.15, "bakat_N": 0.10},
+      "flag_minat": ["S", "E"],
+      "flag_bakat": ["V", "L"],
+      "description": "Kamu tertarik pada masyarakat, ekonomi, dan kebijakan, serta mampu bernalar dan berkomunikasi.",
+      "careers": ["Hukum", "Ekonomi/Akuntansi", "Psikologi", "Ilmu Pemerintahan", "Sosiologi", "Hubungan Internasional"]
+    },
+    "Bahasa": {
+      "name": "Bahasa & Budaya",
+      "weights": {"minat_B": 0.40, "minat_K": 0.10, "bakat_V": 0.30, "bakat_L": 0.20},
+      "flag_minat": ["B"],
+      "flag_bakat": ["V"],
+      "description": "Kamu menonjol pada minat dan kemampuan bahasa, sastra, dan budaya.",
+      "careers": ["Sastra", "Pendidikan Bahasa", "Jurnalistik", "Penerjemahan", "Hubungan Internasional"]
+    },
+    "Vokasi": {
+      "name": "Teknologi & Vokasi",
+      "weights": {"minat_T": 0.35, "minat_K": 0.15, "bakat_S": 0.25, "bakat_N": 0.25},
+      "flag_minat": ["T"],
+      "flag_bakat": ["S", "N"],
+      "description": "Kamu menyukai hal praktis, teknis, dan rancang-bangun.",
+      "careers": ["Teknik Informatika", "Mekatronika", "SMK/Politeknik", "Teknologi Rekayasa"]
+    },
+    "Seni": {
+      "name": "Seni, Desain & Kreatif",
+      "weights": {"minat_K": 0.45, "bakat_S": 0.30, "bakat_V": 0.15, "bakat_L": 0.10},
+      "flag_minat": ["K"],
+      "flag_bakat": ["S"],
+      "description": "Kamu kuat dalam ekspresi visual/kreatif dan imajinasi ruang.",
+      "careers": ["DKV", "Arsitektur", "Desain Produk", "Film/Animasi", "Seni Musik"]
+    }
+  }
+}

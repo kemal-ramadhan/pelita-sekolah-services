@@ -1,0 +1,101 @@
+{
+  "code": "PMK",
+  "name": "Tes Penelusuran Minat Karier Holland",
+  "version": "1.0.0",
+  "instructions": "Asesmen ini menggunakan 4 bagian penelusuran diri: Aktivitas, Kompetensi, Pekerjaan, dan Estimasi Diri. Jawablah sesuai kecenderungan dan penilaian dirimu.",
+  "duration_minutes": 20,
+  "has_timer": false,
+  "parts": {
+    "part_a": {
+      "title": "Bagian A – Aktivitas",
+      "instruction": "Tandai SUKA bila kamu menyukai kegiatan ini, TIDAK bila tidak.",
+      "items": [
+        {"id": "PMK-A-R1", "type": "R", "text": "Memperbaiki barang yang rusak"},
+        {"id": "PMK-A-R2", "type": "R", "text": "Bekerja dengan alat atau mesin"},
+        {"id": "PMK-A-R3", "type": "R", "text": "Berkegiatan di alam terbuka"},
+        {"id": "PMK-A-I1", "type": "I", "text": "Melakukan percobaan atau penelitian"},
+        {"id": "PMK-A-I2", "type": "I", "text": "Memecahkan soal sulit dengan logika"},
+        {"id": "PMK-A-I3", "type": "I", "text": "Membaca topik sains atau teknologi"},
+        {"id": "PMK-A-A1", "type": "A", "text": "Menggambar atau mendesain"},
+        {"id": "PMK-A-A2", "type": "A", "text": "Menulis kreatif atau bermusik"},
+        {"id": "PMK-A-A3", "type": "A", "text": "Membuat konten visual atau tampil di panggung"},
+        {"id": "PMK-A-S1", "type": "S", "text": "Membantu orang menyelesaikan masalahnya"},
+        {"id": "PMK-A-S2", "type": "S", "text": "Mengajar atau membimbing orang lain"},
+        {"id": "PMK-A-S3", "type": "S", "text": "Berkegiatan sosial/relawan"},
+        {"id": "PMK-A-E1", "type": "E", "text": "Memimpin tim"},
+        {"id": "PMK-A-E2", "type": "E", "text": "Meyakinkan atau menjual sesuatu"},
+        {"id": "PMK-A-E3", "type": "E", "text": "Mengorganisir acara atau usaha"},
+        {"id": "PMK-A-C1", "type": "C", "text": "Mengatur data atau arsip dengan rapi"},
+        {"id": "PMK-A-C2", "type": "C", "text": "Menghitung dan mencatat keuangan"},
+        {"id": "PMK-A-C3", "type": "C", "text": "Mengikuti prosedur secara teliti"}
+      ]
+    },
+    "part_b": {
+      "title": "Bagian B – Kompetensi",
+      "instruction": "Tandai BISA bila kamu merasa dapat melakukan ini dengan baik, BELUM bila belum.",
+      "items": [
+        {"id": "PMK-B-R1", "type": "R", "text": "Memakai obeng/bor atau alat sederhana dengan aman"},
+        {"id": "PMK-B-R2", "type": "R", "text": "Membaca petunjuk perakitan dan merakit sesuatu"},
+        {"id": "PMK-B-R3", "type": "R", "text": "Merawat tanaman atau hewan"},
+        {"id": "PMK-B-I1", "type": "I", "text": "Merancang percobaan sederhana"},
+        {"id": "PMK-B-I2", "type": "I", "text": "Menafsirkan grafik atau tabel data"},
+        {"id": "PMK-B-I3", "type": "I", "text": "Menjelaskan alasan ilmiah suatu fenomena"},
+        {"id": "PMK-B-A1", "type": "A", "text": "Menggambar/mendesain sesuatu yang dinilai bagus oleh orang lain"},
+        {"id": "PMK-B-A2", "type": "A", "text": "Menulis cerita atau puisi yang orisinal"},
+        {"id": "PMK-B-A3", "type": "A", "text": "Memainkan alat musik, menari, atau berakting"},
+        {"id": "PMK-B-S1", "type": "S", "text": "Mendengarkan dan menenangkan teman yang sedih"},
+        {"id": "PMK-B-S2", "type": "S", "text": "Menjelaskan pelajaran kepada teman hingga ia paham"},
+        {"id": "PMK-B-S3", "type": "S", "text": "Bekerja sama dengan orang yang berbeda sifat"},
+        {"id": "PMK-B-E1", "type": "E", "text": "Berbicara di depan kelas dengan percaya diri"},
+        {"id": "PMK-B-E2", "type": "E", "text": "Membagi tugas dan memotivasi anggota kelompok"},
+        {"id": "PMK-B-E3", "type": "E", "text": "Menawarkan atau menawar sesuatu secara meyakinkan"},
+        {"id": "PMK-B-C1", "type": "C", "text": "Membuat tabel/spreadsheet sederhana"},
+        {"id": "PMK-B-C2", "type": "C", "text": "Menyusun jadwal dan menaatinya"},
+        {"id": "PMK-B-C3", "type": "C", "text": "Memeriksa tulisan/hitungan hingga bebas kesalahan"}
+      ]
+    },
+    "part_c": {
+      "title": "Bagian C – Pekerjaan",
+      "instruction": "Tandai TERTARIK bila pekerjaan ini menarik bagimu (abaikan gaji/pendidikan), TIDAK bila tidak.",
+      "items": [
+        {"id": "PMK-C-R1", "type": "R", "text": "Teknisi otomotif/mesin"},
+        {"id": "PMK-C-R2", "type": "R", "text": "Ahli pertanian/peternakan"},
+        {"id": "PMK-C-R3", "type": "R", "text": "Teknisi listrik/elektronik"},
+        {"id": "PMK-C-I1", "type": "I", "text": "Peneliti/ilmuwan"},
+        {"id": "PMK-C-I2", "type": "I", "text": "Dokter"},
+        {"id": "PMK-C-I3", "type": "I", "text": "Analis data/programmer"},
+        {"id": "PMK-C-A1", "type": "A", "text": "Desainer grafis/animator"},
+        {"id": "PMK-C-A2", "type": "A", "text": "Penulis/sutradara"},
+        {"id": "PMK-C-A3", "type": "A", "text": "Musisi/seniman"},
+        {"id": "PMK-C-S1", "type": "S", "text": "Guru"},
+        {"id": "PMK-C-S2", "type": "S", "text": "Perawat/psikolog"},
+        {"id": "PMK-C-S3", "type": "S", "text": "Pekerja sosial"},
+        {"id": "PMK-C-E1", "type": "E", "text": "Pengusaha"},
+        {"id": "PMK-C-E2", "type": "E", "text": "Manajer/pemimpin organisasi"},
+        {"id": "PMK-C-E3", "type": "E", "text": "Pemasar (marketing)"},
+        {"id": "PMK-C-C1", "type": "C", "text": "Akuntan"},
+        {"id": "PMK-C-C2", "type": "C", "text": "Staf administrasi/perbankan"},
+        {"id": "PMK-C-C3", "type": "C", "text": "Auditor/petugas pajak"}
+      ]
+    },
+    "part_d": {
+      "title": "Bagian D – Estimasi Diri",
+      "instruction": "Nilai dirimu dibanding teman seusiamu pada skala 1 (Paling rendah) hingga 7 (Paling tinggi).",
+      "scale": {"min": 1, "max": 7},
+      "items": [
+        {"id": "PMK-D1-R", "type": "R", "category": "Kemampuan", "text": "Kemampuan mekanik/teknik"},
+        {"id": "PMK-D2-R", "type": "R", "category": "Keterampilan", "text": "Keterampilan tangan (pertukangan, merakit, berkebun)"},
+        {"id": "PMK-D1-I", "type": "I", "category": "Kemampuan", "text": "Kemampuan ilmiah/analitis"},
+        {"id": "PMK-D2-I", "type": "I", "category": "Keterampilan", "text": "Kemampuan matematika dan logika"},
+        {"id": "PMK-D1-A", "type": "A", "category": "Kemampuan", "text": "Kemampuan seni (visual/musik/menulis)"},
+        {"id": "PMK-D2-A", "type": "A", "category": "Keterampilan", "text": "Kreativitas/orisinalitas ide"},
+        {"id": "PMK-D1-S", "type": "S", "category": "Kemampuan", "text": "Kemampuan membantu & mengajar"},
+        {"id": "PMK-D2-S", "type": "S", "category": "Keterampilan", "text": "Kemampuan memahami dan bekerja sama dengan orang"},
+        {"id": "PMK-D1-E", "type": "E", "category": "Kemampuan", "text": "Kemampuan memimpin & meyakinkan"},
+        {"id": "PMK-D2-E", "type": "E", "category": "Keterampilan", "text": "Kemampuan berbicara/negosiasi"},
+        {"id": "PMK-D1-C", "type": "C", "category": "Kemampuan", "text": "Kemampuan administrasi & ketelitian"},
+        {"id": "PMK-D2-C", "type": "C", "category": "Keterampilan", "text": "Kemampuan mengorganisir data/jadwal"}
+      ]
+    }
+  }
+}

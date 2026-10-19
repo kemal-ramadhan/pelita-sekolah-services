@@ -1,0 +1,1140 @@
+{
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "School (institution) and teacher management service for EduPilot.",
+        "title": "EduPilot Instantion Service API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8888",
+    "basePath": "/",
+    "paths": {
+        "/health": {
+            "get": {
+                "description": "Check service, database, and Redis connectivity",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "System"
+                ],
+                "summary": "Health Check",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.HealthResponse"
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/controller.HealthResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/instantion/admin/schools": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "List schools (admin)",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit (max 100)",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search name / code / npsn",
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "active | inactive",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Create a school, optionally with an institution account (admin)",
+                "parameters": [
+                    {
+                        "description": "School (+ optional account)",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.AdminCreateSchoolRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/instantion/admin/schools/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Get a school (admin)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "School ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Update a school (admin)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "School ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "School",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.SchoolRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/instantion/admin/schools/{id}/accounts": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "List accounts linked to a school (admin)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "School ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Link an auth user to a school (admin)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "School ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "user_id",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.LinkAccountRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Unlink an auth user from a school (admin)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "School ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "user_id",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.LinkAccountRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/instantion/admin/schools/{id}/status": {
+            "patch": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Activate / deactivate a school (admin)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "School ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "is_active (required)",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.SchoolStatusRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/instantion/admin/stats": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Platform statistics (admin)",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/instantion/school/profile": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "School"
+                ],
+                "summary": "Get tenant school profile",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "SCHOOL_NOT_SET_UP",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "School"
+                ],
+                "summary": "Update tenant school profile",
+                "parameters": [
+                    {
+                        "description": "School",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.SchoolRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "School"
+                ],
+                "summary": "Create tenant school profile (once)",
+                "parameters": [
+                    {
+                        "description": "School",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.SchoolRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/instantion/school/teachers": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teachers"
+                ],
+                "summary": "List teachers of the tenant school",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Page (default 1)",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Limit (default 10, max 100)",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search full_name / employee_code / email",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teachers"
+                ],
+                "summary": "Create a teacher",
+                "parameters": [
+                    {
+                        "description": "Teacher",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.TeacherRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/instantion/school/teachers/import": {
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teachers"
+                ],
+                "summary": "Import teachers from .xlsx (first sheet, header row 1)",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": ".xlsx file, max 5 MB",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Validate only",
+                        "name": "dry_run",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/instantion/school/teachers/import/template": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                ],
+                "tags": [
+                    "Teachers"
+                ],
+                "summary": "Download the teacher import .xlsx template",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                }
+            }
+        },
+        "/instantion/school/teachers/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teachers"
+                ],
+                "summary": "Get a teacher (with subjects, assignments, schedules)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Teacher ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teachers"
+                ],
+                "summary": "Update a teacher",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Teacher ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Teacher",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.TeacherRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teachers"
+                ],
+                "summary": "Delete (soft) a teacher",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Teacher ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controller.HealthResponse": {
+            "type": "object",
+            "properties": {
+                "database": {
+                    "type": "string"
+                },
+                "redis": {
+                    "type": "string"
+                },
+                "service": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.AccountRequest": {
+            "type": "object",
+            "required": [
+                "email",
+                "full_name",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "full_name": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "password": {
+                    "type": "string",
+                    "maxLength": 72,
+                    "minLength": 8
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 50
+                }
+            }
+        },
+        "dto.AdminCreateSchoolRequest": {
+            "type": "object",
+            "required": [
+                "code",
+                "name",
+                "school_level"
+            ],
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/dto.AccountRequest"
+                },
+                "address": {
+                    "type": "string",
+                    "maxLength": 2000
+                },
+                "city_id": {
+                    "$ref": "#/definitions/dto.OptionalUUID"
+                },
+                "code": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "district_id": {
+                    "$ref": "#/definitions/dto.OptionalUUID"
+                },
+                "email": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "npsn": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "nss": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "postal_code": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "province_id": {
+                    "$ref": "#/definitions/dto.OptionalUUID"
+                },
+                "school_level": {
+                    "type": "string",
+                    "enum": [
+                        "TK",
+                        "SD",
+                        "SMP",
+                        "SMA",
+                        "SMK",
+                        "SLB",
+                        "Lainnya"
+                    ]
+                },
+                "school_status": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "timezone": {
+                    "type": "string",
+                    "maxLength": 64
+                },
+                "website": {
+                    "type": "string",
+                    "maxLength": 255
+                }
+            }
+        },
+        "dto.LinkAccountRequest": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.OptionalUUID": {
+            "type": "object",
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                },
+                "valid": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "dto.SchoolRequest": {
+            "type": "object",
+            "required": [
+                "code",
+                "name",
+                "school_level"
+            ],
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "maxLength": 2000
+                },
+                "city_id": {
+                    "$ref": "#/definitions/dto.OptionalUUID"
+                },
+                "code": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "district_id": {
+                    "$ref": "#/definitions/dto.OptionalUUID"
+                },
+                "email": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "npsn": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "nss": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "postal_code": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "province_id": {
+                    "$ref": "#/definitions/dto.OptionalUUID"
+                },
+                "school_level": {
+                    "type": "string",
+                    "enum": [
+                        "TK",
+                        "SD",
+                        "SMP",
+                        "SMA",
+                        "SMK",
+                        "SLB",
+                        "Lainnya"
+                    ]
+                },
+                "school_status": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "timezone": {
+                    "type": "string",
+                    "maxLength": 64
+                },
+                "website": {
+                    "type": "string",
+                    "maxLength": 255
+                }
+            }
+        },
+        "dto.SchoolStatusRequest": {
+            "type": "object",
+            "required": [
+                "is_active"
+            ],
+            "properties": {
+                "is_active": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "dto.TeacherAssignmentReq": {
+            "type": "object",
+            "properties": {
+                "employee_position_id": {
+                    "$ref": "#/definitions/dto.OptionalUUID"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "start_date": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.TeacherRequest": {
+            "type": "object",
+            "required": [
+                "employee_code",
+                "full_name"
+            ],
+            "properties": {
+                "assignments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.TeacherAssignmentReq"
+                    }
+                },
+                "email": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "employee_code": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "employee_status": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "full_name": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "join_date": {
+                    "type": "string",
+                    "maxLength": 10
+                },
+                "number": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "number_type": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "schedules": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.TeacherScheduleReq"
+                    }
+                },
+                "status": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "subjects": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.TeacherSubjectReq"
+                    }
+                }
+            }
+        },
+        "dto.TeacherScheduleReq": {
+            "type": "object",
+            "properties": {
+                "class_id": {
+                    "$ref": "#/definitions/dto.OptionalUUID"
+                },
+                "day_of_week": {
+                    "type": "integer"
+                },
+                "end_time": {
+                    "type": "string"
+                },
+                "start_time": {
+                    "type": "string"
+                },
+                "subject_id": {
+                    "$ref": "#/definitions/dto.OptionalUUID"
+                }
+            }
+        },
+        "dto.TeacherSubjectReq": {
+            "type": "object",
+            "properties": {
+                "academic_id": {
+                    "$ref": "#/definitions/dto.OptionalUUID"
+                },
+                "is_primary": {
+                    "type": "boolean"
+                },
+                "subject_id": {
+                    "$ref": "#/definitions/dto.OptionalUUID"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

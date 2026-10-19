@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+.git
+.gitignore
+.dockerignore
+Dockerfile
+logs/
+*.log
+.DS_Store
+*.test
+gateway-service

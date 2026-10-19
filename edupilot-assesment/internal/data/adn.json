@@ -1,0 +1,82 @@
+{
+  "code": "ADN",
+  "name": "Asesmen Diagnostik Non-Kognitif",
+  "version": "1.0.0",
+  "instructions": "Asesmen ini mengukur preferensi gaya belajarmu, kebiasaan belajar, serta minat karier singkat untuk membantumu dan guru memahami cara belajar terbaikmu.",
+  "duration_minutes": 15,
+  "has_timer": false,
+  "module1_gaya_belajar": {
+    "title": "Modul 1 – Gaya Belajar",
+    "scale": {
+      "min": 1,
+      "max": 4,
+      "labels": ["Tidak pernah", "Jarang", "Sering", "Selalu"]
+    },
+    "items": [
+      {"id": "ADN-V1", "modality": "V", "text": "Saya lebih mudah paham jika materi disajikan dengan gambar, diagram, atau peta konsep"},
+      {"id": "ADN-V2", "modality": "V", "text": "Saya menandai catatan dengan warna atau simbol agar mudah diingat"},
+      {"id": "ADN-V3", "modality": "V", "text": "Saya membayangkan gambar atau grafik di kepala saat mengingat pelajaran"},
+      {"id": "ADN-V4", "modality": "V", "text": "Saya lebih paham arah jika melihat peta daripada mendengar petunjuk lisan"},
+      {"id": "ADN-V5", "modality": "V", "text": "Video atau animasi membantu saya memahami suatu proses"},
+
+      {"id": "ADN-A1", "modality": "A", "text": "Saya mudah memahami penjelasan guru yang disampaikan secara lisan"},
+      {"id": "ADN-A2", "modality": "A", "text": "Saya belajar lebih baik dengan berdiskusi atau tanya jawab"},
+      {"id": "ADN-A3", "modality": "A", "text": "Saya mengingat pelajaran dengan membacanya keras-keras atau menjelaskannya ke orang lain"},
+      {"id": "ADN-A4", "modality": "A", "text": "Saya lebih mudah mengingat informasi yang saya dengar"},
+      {"id": "ADN-A5", "modality": "A", "text": "Rekaman audio atau podcast pelajaran membantu saya belajar"},
+
+      {"id": "ADN-R1", "modality": "R", "text": "Saya lebih nyaman belajar dari buku teks atau artikel tertulis"},
+      {"id": "ADN-R2", "modality": "R", "text": "Saya mencatat dan membuat ringkasan tertulis untuk mengingat pelajaran"},
+      {"id": "ADN-R3", "modality": "R", "text": "Saya suka membuat daftar atau menulis ulang materi dengan kata-kata sendiri"},
+      {"id": "ADN-R4", "modality": "R", "text": "Saya lebih paham petunjuk jika tertulis daripada dijelaskan lisan"},
+      {"id": "ADN-R5", "modality": "R", "text": "Saya senang mencari dan membaca informasi tambahan di buku atau internet"},
+
+      {"id": "ADN-K1", "modality": "K", "text": "Saya lebih mudah paham setelah mempraktikkan atau mencoba langsung"},
+      {"id": "ADN-K2", "modality": "K", "text": "Saya sulit duduk diam lama dan lebih suka belajar sambil bergerak"},
+      {"id": "ADN-K3", "modality": "K", "text": "Saya belajar baik lewat percobaan, proyek, atau simulasi"},
+      {"id": "ADN-K4", "modality": "K", "text": "Contoh nyata dan pengalaman langsung membantu saya mengingat"},
+      {"id": "ADN-K5", "modality": "K", "text": "Saya suka memegang atau membuat model untuk memahami sesuatu"}
+    ]
+  },
+  "module2_sosio_emosional": {
+    "title": "Modul 2 – Kebiasaan Belajar & Sosio-Emosional",
+    "scale": {
+      "min": 1,
+      "max": 4,
+      "labels": ["Sangat tidak setuju", "Tidak setuju", "Setuju", "Sangat setuju"]
+    },
+    "items": [
+      {"id": "ADN-MOT1", "subscale": "motivasi", "text": "Saya belajar karena ingin memahami, bukan hanya mengejar nilai"},
+      {"id": "ADN-MOT2", "subscale": "motivasi", "text": "Saya penasaran dengan banyak hal baru di sekolah"},
+      {"id": "ADN-EFI1", "subscale": "efikasi_diri", "text": "Saya yakin bisa menguasai pelajaran yang sulit jika berusaha"},
+      {"id": "ADN-EFI2", "subscale": "efikasi_diri", "text": "Saya percaya diri menjawab pertanyaan di kelas"},
+      {"id": "ADN-REG1", "subscale": "regulasi_belajar", "text": "Saya membuat jadwal belajar dan mengikutinya"},
+      {"id": "ADN-REG2", "subscale": "regulasi_belajar", "text": "Setelah belajar, saya mengecek ulang apakah saya sudah paham"},
+      {"id": "ADN-KEC1", "subscale": "kecemasan_belajar", "text": "Saya begitu cemas sebelum ujian sampai sulit berpikir jernih"},
+      {"id": "ADN-SOS1", "subscale": "dukungan_sosial", "text": "Saya merasa diterima oleh teman-teman di kelas"},
+      {"id": "ADN-WEL1", "subscale": "waspada_kesejahteraan", "text": "Akhir-akhir ini saya sering merasa sedih atau tertekan hampir setiap hari"}
+    ]
+  },
+  "module3_minat_karier": {
+    "title": "Modul 3 – Minat Karier Singkat",
+    "scale": {
+      "min": 1,
+      "max": 4,
+      "labels": ["Tidak tertarik", "Kurang tertarik", "Tertarik", "Sangat tertarik"]
+    },
+    "items": [
+      {"id": "ADN-KR1", "type": "R", "text": "Saya tertarik pada pekerjaan yang memakai alat atau mesin"},
+      {"id": "ADN-KR2", "type": "R", "text": "Saya senang bekerja di lapangan atau luar ruangan"},
+      {"id": "ADN-KI1", "type": "I", "text": "Saya tertarik meneliti atau menganalisis sesuatu"},
+      {"id": "ADN-KI2", "type": "I", "text": "Saya senang memecahkan masalah yang rumit"},
+      {"id": "ADN-KA1", "type": "A", "text": "Saya tertarik berkarya seni, tulisan, atau desain"},
+      {"id": "ADN-KA2", "type": "A", "text": "Saya senang mengungkapkan ide dengan cara yang unik"},
+      {"id": "ADN-KS1", "type": "S", "text": "Saya tertarik pada pekerjaan yang membantu atau mengajar orang"},
+      {"id": "ADN-KS2", "type": "S", "text": "Saya senang bekerja bersama banyak orang"},
+      {"id": "ADN-KE1", "type": "E", "text": "Saya tertarik memimpin atau mengelola usaha/organisasi"},
+      {"id": "ADN-KE2", "type": "E", "text": "Saya senang membujuk orang lain agar mau bergabung"},
+      {"id": "ADN-KC1", "type": "C", "text": "Saya tertarik pada pekerjaan administrasi atau pengelolaan data/keuangan"},
+      {"id": "ADN-KC2", "type": "C", "text": "Saya senang bekerja teratur dengan prosedur yang jelas"}
+    ]
+  }
+}

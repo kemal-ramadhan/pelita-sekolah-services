@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'edupilot-auth-service'
+    static_configs:
+      - targets: ['edupilot-auth-service:8080']
+
+  - job_name: 'jaeger'
+    static_configs:
+      - targets: ['jaeger:14268']

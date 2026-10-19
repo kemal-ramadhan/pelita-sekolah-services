@@ -1,0 +1,6 @@
+**/.env
+**/.env.*
+!**/.env.example
+**/postgres-data/
+uploads/
+**/.DS_Store

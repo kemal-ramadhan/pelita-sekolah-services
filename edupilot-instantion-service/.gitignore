@@ -1,0 +1,5 @@
+.env
+postgres-data/
+/edupilot-instantion-service
+*.test
+*.out

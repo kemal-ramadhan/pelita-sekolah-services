@@ -1,0 +1,34 @@
+{
+  "version": "1.0.0-provisional",
+  "note": "Ambang batas PRA-VALIDASI (PRD §0.2). Ganti dengan norma lokal setelah uji coba (PRD §12).",
+  "validity": {
+    "max_missing_ratio": 0.10,
+    "straight_line_run": 20,
+    "min_seconds_per_item": 2.0,
+    "min_median_ratio": 0.40,
+    "min_median_sample": 5,
+    "flat_range_below": 4
+  },
+  "ria": {
+    "level_high_pct": 70, "level_mid_pct": 40,
+    "diff_clear": 15, "diff_mid": 8
+  },
+  "pmk": {
+    "diff_clear": 10, "diff_mid": 5,
+    "gap_high": 30, "gap_low": -30
+  },
+  "tmb": {
+    "bakat_mid_pct": 50, "bakat_high_pct": 83.33,
+    "rumpun_very_pct": 70, "rumpun_fit_pct": 55, "rumpun_some_pct": 40,
+    "equal_alternative_gap": 5,
+    "flag_minat_high_pct": 70, "flag_minat_low_pct": 40
+  },
+  "adn": {
+    "vark_unclear_below": 10, "vark_dominant_min": 15, "vark_gap_dominant": 3, "vark_close": 2, "vark_multi_spread": 3,
+    "socio_strong": 3.0, "socio_mid": 2.0,
+    "anxiety_flag": 3, "welfare_flag": 3,
+    "brief_high": 7, "brief_mid": 5
+  },
+  "cindex": { "high": 14, "mid": 8 },
+  "careers": { "min": 5, "max": 10 }
+}

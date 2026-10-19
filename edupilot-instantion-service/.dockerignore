@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+postgres-data/
+.git/
+.gitignore
+*.md
+*_test.go
+docker-compose*.yml
+prometheus.yml

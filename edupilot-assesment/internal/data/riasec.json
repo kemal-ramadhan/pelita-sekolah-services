@@ -1,0 +1,72 @@
+{
+  "code": "RIA",
+  "name": "Asesmen Preferensi Karier (RIASEC)",
+  "version": "1.0.0",
+  "instructions": "Tidak ada jawaban benar atau salah. Pikirkan kegiatan berikut seandainya kamu punya waktu, kemampuan, dan kesempatan untuk melakukannya. Seberapa kamu menyukainya?",
+  "duration_minutes": 15,
+  "has_timer": false,
+  "scale": {
+    "min": 1,
+    "max": 5,
+    "labels": ["Sangat tidak suka", "Tidak suka", "Netral", "Suka", "Sangat suka"]
+  },
+  "items": [
+    {"id": "RIA-R1", "type": "R", "text": "Memperbaiki sepeda, sepeda motor, atau peralatan rumah yang rusak", "scored": true},
+    {"id": "RIA-I1", "type": "I", "text": "Melakukan percobaan sains untuk menjawab sebuah pertanyaan", "scored": true},
+    {"id": "RIA-A1", "type": "A", "text": "Menggambar, melukis, atau mendesain sesuatu", "scored": true},
+    {"id": "RIA-S1", "type": "S", "text": "Membantu teman yang kesulitan belajar", "scored": true},
+    {"id": "RIA-E1", "type": "E", "text": "Memimpin kelompok atau organisasi", "scored": true},
+    {"id": "RIA-C1", "type": "C", "text": "Merapikan dan mengatur file, catatan, atau data agar tertata", "scored": true},
+
+    {"id": "RIA-R2", "type": "R", "text": "Merakit perabot, model, atau rangkaian elektronik sederhana", "scored": true},
+    {"id": "RIA-I2", "type": "I", "text": "Membaca artikel tentang penemuan ilmiah atau teknologi baru", "scored": true},
+    {"id": "RIA-A2", "type": "A", "text": "Menulis cerita, puisi, atau naskah", "scored": true},
+    {"id": "RIA-S2", "type": "S", "text": "Mendengarkan teman yang bercerita tentang masalahnya", "scored": true},
+    {"id": "RIA-E2", "type": "E", "text": "Meyakinkan orang lain agar setuju dengan ide saya", "scored": true},
+    {"id": "RIA-C2", "type": "C", "text": "Mengerjakan tugas dengan prosedur jelas langkah demi langkah", "scored": true},
+
+    {"id": "RIA-R3", "type": "R", "text": "Bekerja di luar ruangan, seperti berkebun atau merawat hewan", "scored": true},
+    {"id": "RIA-I3", "type": "I", "text": "Memecahkan soal matematika atau teka-teki logika yang sulit", "scored": true},
+    {"id": "RIA-A3", "type": "A", "text": "Bermain musik, bernyanyi, atau menciptakan lagu", "scored": true},
+    {"id": "RIA-S3", "type": "S", "text": "Mengajar atau melatih anak yang lebih kecil", "scored": true},
+    {"id": "RIA-AC1", "type": null, "text": "Agar kami tahu kamu membaca dengan saksama, pilih jawaban Netral untuk pernyataan ini.", "scored": false, "expected": 3},
+    {"id": "RIA-E3", "type": "E", "text": "Menjual barang atau menjalankan usaha kecil", "scored": true},
+    {"id": "RIA-C3", "type": "C", "text": "Mencatat pemasukan dan pengeluaran dengan teliti", "scored": true},
+
+    {"id": "RIA-R4", "type": "R", "text": "Memakai alat tukang (bor, gergaji, obeng) untuk membuat sesuatu", "scored": true},
+    {"id": "RIA-I4", "type": "I", "text": "Mencari tahu penyebab suatu fenomena alam atau kejadian", "scored": true},
+    {"id": "RIA-A4", "type": "A", "text": "Membuat video, foto, atau konten kreatif", "scored": true},
+    {"id": "RIA-S4", "type": "S", "text": "Menjadi relawan dalam kegiatan sosial", "scored": true},
+    {"id": "RIA-E4", "type": "E", "text": "Berbicara atau berdebat di depan banyak orang", "scored": true},
+    {"id": "RIA-C4", "type": "C", "text": "Memeriksa dokumen untuk menemukan kesalahan kecil", "scored": true},
+
+    {"id": "RIA-R5", "type": "R", "text": "Mengoperasikan mesin atau kendaraan", "scored": true},
+    {"id": "RIA-I5", "type": "I", "text": "Menganalisis data atau grafik untuk menemukan pola", "scored": true},
+    {"id": "RIA-A5", "type": "A", "text": "Berakting, menari, atau tampil di panggung", "scored": true},
+    {"id": "RIA-S5", "type": "S", "text": "Bekerja sama dalam kelompok untuk mencapai tujuan bersama", "scored": true},
+    {"id": "RIA-E5", "type": "E", "text": "Mengambil keputusan berisiko demi mencapai target", "scored": true},
+    {"id": "RIA-C5", "type": "C", "text": "Membuat jadwal dan daftar tugas yang rapi", "scored": true},
+
+    {"id": "RIA-R6", "type": "R", "text": "Membangun atau memasang sesuatu (rak, pagar, instalasi listrik sederhana)", "scored": true},
+    {"id": "RIA-I6", "type": "I", "text": "Mempelajari cara kerja tubuh manusia, tumbuhan, atau hewan", "scored": true},
+    {"id": "RIA-A6", "type": "A", "text": "Menghias ruangan atau menata sesuatu agar tampak indah", "scored": true},
+    {"id": "RIA-S6", "type": "S", "text": "Merawat atau menolong orang yang sakit atau membutuhkan", "scored": true},
+    {"id": "RIA-E6", "type": "E", "text": "Merencanakan dan mengorganisir acara atau kampanye", "scored": true},
+    {"id": "RIA-C6", "type": "C", "text": "Memakai spreadsheet atau aplikasi untuk mengelola data", "scored": true},
+
+    {"id": "RIA-R7", "type": "R", "text": "Berkegiatan fisik di lapangan, seperti pramuka atau mendaki", "scored": true},
+    {"id": "RIA-I7", "type": "I", "text": "Menulis program atau memecahkan masalah dengan algoritma", "scored": true},
+    {"id": "RIA-A7", "type": "A", "text": "Mencoba gaya atau ide baru yang tidak biasa", "scored": true},
+    {"id": "RIA-AC2", "type": null, "text": "Agar kami tahu kamu membaca dengan saksama, pilih jawaban Netral untuk pernyataan ini.", "scored": false, "expected": 3},
+    {"id": "RIA-S7", "type": "S", "text": "Menjadi penengah ketika teman berselisih", "scored": true},
+    {"id": "RIA-E7", "type": "E", "text": "Mengikuti lomba atau kompetisi untuk menjadi yang terbaik", "scored": true},
+    {"id": "RIA-C7", "type": "C", "text": "Mengikuti aturan dan standar yang sudah ditetapkan", "scored": true},
+
+    {"id": "RIA-R8", "type": "R", "text": "Membongkar suatu alat untuk melihat cara kerjanya", "scored": true},
+    {"id": "RIA-I8", "type": "I", "text": "Meneliti suatu topik secara mendalam sampai benar-benar mengerti", "scored": true},
+    {"id": "RIA-A8", "type": "A", "text": "Mengunjungi pameran seni, konser, atau pertunjukan", "scored": true},
+    {"id": "RIA-S8", "type": "S", "text": "Menjelaskan sesuatu kepada orang lain sampai mereka paham", "scored": true},
+    {"id": "RIA-E8", "type": "E", "text": "Menegosiasikan harga atau kesepakatan", "scored": true},
+    {"id": "RIA-C8", "type": "C", "text": "Menyelesaikan pekerjaan rutin dengan akurat", "scored": true}
+  ]
+}
